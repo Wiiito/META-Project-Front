@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+//Context
+import { MainProvider } from './contexts/mainContext'
+import { UsersProvider } from './contexts/userContext'
+import { SocketProvider } from './contexts/socketContext'
+
+//Routing
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+import Layout from './components/Layout'
+import Login from './components/login'
+import Home from './components/home'
+import Chat from './components/chat'
+
+import GlobalStyles, { Theme } from './components/globalStyles'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <MainProvider>
+      <UsersProvider>
+        <SocketProvider>
+          <GlobalStyles />
+          <Theme>
+            <Router>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/chat" element={<Chat />} />
+                  <Route path="/login" element={<Login />} />
+                </Routes>
+              </Layout>
+            </Router>
+          </Theme>
+        </SocketProvider>
+      </UsersProvider>
+    </MainProvider>
+  )
 }
 
-export default App;
+export default App
