@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as Styles from './styles'
 import { Link } from 'react-router-dom'
+import { MainContext } from '../../contexts/mainContext'
 
 const Layout = ({ children }) => {
+  const user = useContext(MainContext).name
   return (
     <Styles.Container>
       <Styles.Header>
@@ -13,7 +15,11 @@ const Layout = ({ children }) => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/chat">Chat</Link>
+              {user ? (
+                <Link to="/chat">Chat</Link>
+              ) : (
+                <Link to="/login">Chat</Link>
+              )}
             </li>
           </ul>
         </nav>

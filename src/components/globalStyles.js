@@ -6,6 +6,9 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+  body {
+    min-height: 100vh;
+  }
 `
 export const colors = {
   darkGray: '#667F7D',
